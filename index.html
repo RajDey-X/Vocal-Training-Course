@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vocal Training Course</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+        <style>
+            :root {
+                --bg-light: #f0f0f0;
+                --heading-light: #d3d3d3;
+                --text-light: #464646;
+                --bg-dark: #252525;
+                --heading-dark: #424242;
+                --text-dark: #d3d3d3;
+                --border-radious: 15px;
+            }
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                background-color: var(--bg-light);
+                color: var(--text-light);
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+            th {
+                background-color: var(--heading-light);
+                color: var(--text-light);
+            }
+
+            td {
+                background-color: var(--bg-light);
+                color: var(--text-light);
+            }
+
+            .checkbox {
+                opacity: 0;
+                top: 10px;
+                right: 10px;
+                position: absolute;
+            }
+
+            .checkbox-label {
+                background-color: var(--heading-dark);
+                width: 50px;
+                height: 26px;
+                border-radius: 50px;
+                position: relative;
+                padding: 5px;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 10px 10px 10px auto;
+            }
+
+            .fa-moon {
+                color: #f1c40f;
+            }
+
+            .fa-sun {
+                color: #f39c12;
+            }
+
+            .checkbox-label .ball {
+                background-color: #fff;
+                width: 22px;
+                height: 22px;
+                position: absolute;
+                left: 2px;
+                top: 2px;
+                border-radius: 50%;
+                transition: transform 0.2s linear;
+            }
+
+            .checkbox:checked+.checkbox-label .ball {
+                transform: translateX(24px);
+            }
+            .nav-tabs{
+                --bs-nav-tabs-border-color: var(--heading-light);
+            }
+            .dark-mode .nav-tabs{
+                --bs-nav-tabs-border-color: var(--heading-dark);
+            }
+            .nav-link{
+                color: var(--text-light);
+            }
+            .dark-mode .nav-link{
+                color: var(--text-dark);
+            }
+            .nav-tabs .nav-link.active{
+                color: var(--text-light);
+                background-color: var(--heading-light);
+                border-color: var(--heading-light);
+            }
+            .dark-mode .nav-tabs .nav-link.active{
+                color: var(--text-dark);
+                background-color: var(--heading-dark);
+                border-color: var(--heading-dark);
+            }
+            .reference {
+                color: var(--text-light);
+            }
+
+            .accordion-item:not(:first-of-type) {
+                border-top: 1px solid var(--heading-light) !important;
+            }
+
+            .accordion-item {
+                background-color: var(--heading-light);
+                border-radius: var(--border-radious) !important;
+                margin-bottom: 20px;
+                border: 1px solid var(--heading-light) !important;
+            }
+
+            .accordion-item .accordion-button:focus {
+                box-shadow: none;
+            }
+
+            .accordion-item .accordion-button {
+                border-radius: var(--border-radious) !important;
+            }
+
+            .accordion-item .accordion-body {
+                background-color: var(--bg-light);
+                border-bottom-right-radius: var(--border-radious) !important;
+                border-bottom-left-radius: var(--border-radious) !important;
+            }
+
+            .accordion-item .accordion-button::after {
+                content: "\f358";
+                color: var(--text-light);
+                font-family: "Font Awesome 5 Free";
+                display: inline-block;
+                padding-left: 3px;
+                vertical-align: middle;
+                font-weight: 900;
+                background-image: none !important;
+            }
+
+            .accordion-item .accordion-button,
+            .accordion-item .accordion-button:not(.collapsed) {
+                background-color: var(--heading-light);
+                color: var(--text-light);
+            }
+
+            .accordion-item .accordion-button:not(.collapsed) {
+                border-bottom-right-radius: 0px !important;
+                border-bottom-left-radius: 0px !important;
+            }
+
+            .dark-mode {
+                background-color: var(--bg-dark);
+                color: var(--text-dark);
+            }
+            
+            .dark-mode th {
+                background-color: var(--heading-dark);
+                color: var(--text-dark);
+            }
+
+            .dark-mode td {
+                background-color: var(--bg-dark);
+                color: var(--text-dark);
+            }
+
+            .dark-mode .reference {
+                color: var(--text-dark);
+            }
+
+            .dark-mode .accordion-item:not(:first-of-type) {
+                border-top: 1px solid var(--heading-dark) !important;
+            }
+
+            .dark-mode .accordion-item {
+                background-color: var(--heading-dark);
+                border: 1px solid var(--heading-dark) !important;
+            }
+
+            .dark-mode .accordion-item .accordion-body {
+                background-color: var(--bg-dark);
+            }
+
+            .dark-mode .accordion-item .accordion-button,
+            .dark-mode .accordion-item .accordion-button:not(.collapsed) {
+                background-color: var(--heading-dark);
+                color: var(--text-dark);
+            }
+
+            .dark-mode .accordion-button,
+            .dark-mode .accordion-button:not(.collapsed) {
+                background-color: var(--bg-dark);
+                color: var(--text-dark);
+            }
+
+            .dark-mode .accordion-button::after {
+                color: var(--text-dark);
+            }
+        </style>
+    </head>
+
+    <body>
+        <div>
+            <input type="checkbox" class="checkbox" id="checkbox">
+            <label for="checkbox" class="checkbox-label">
+                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
+                <span class="ball"></span>
+            </label>
+        </div>
+        <div class="container mt-5">
+            <h1 class="text-center">Vocal Training Course</h1>
+
+            <!-- Tabs -->
+            <ul class="nav nav-tabs" id="courseTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="weekly-modules-tab" data-bs-toggle="tab"
+                            data-bs-target="#weekly-modules" type="button" role="tab" aria-controls="weekly-modules"
+                            aria-selected="true">Weekly Modules</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="overall-curriculum-tab" data-bs-toggle="tab"
+                            data-bs-target="#overall-curriculum" type="button" role="tab"
+                            aria-controls="overall-curriculum" aria-selected="false">Overall Curriculum</button>
+                </li>
+            </ul>
+
+            <div class="tab-content mt-3" id="courseTabsContent">
+                <!-- Weekly Modules Tab -->
+                <div class="tab-pane fade show active" id="weekly-modules" role="tabpanel"
+                     aria-labelledby="weekly-modules-tab">
+                    <div class="accordion" id="vocalCourse">
+                        <!-- Week 1 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="week1Heading">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#week1" aria-expanded="true" aria-controls="week1">
+                                    Week 1: Build a Strong Vocal Foundation
+                                </button>
+                            </h2>
+                            <div id="week1" class="accordion-collapse collapse show" aria-labelledby="week1Heading"
+                                 data-bs-parent="#vocalCourse">
+                                <div class="accordion-body">
+                                    <div class="accordion" id="week1Days">
+                                        <!-- Day 1 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day1Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day1"
+                                                        aria-expanded="false" aria-controls="day1">
+                                                    Day 1: Breathing & Posture Fundamentals
+                                                </button>
+                                            </h2>
+                                            <div id="day1" class="accordion-collapse collapse"
+                                                 aria-labelledby="day1Heading" data-bs-parent="#week1Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Deep Breathing Exercises</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Posture Check & Alignment (Stand relaxed, straight,
+                                                                    shoulders down)</td>
+                                                                <td><a href="#">Read Guide</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Lip Trills & Humming Warm-Up</td>
+                                                                <td><a href="#">Read Guide</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Sustained Note Practice (Hold a note for 10 sec,
+                                                                    steady pitch)</td>
+                                                                <td>Vocal Tone Stability Guide</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Record & Analyze Voice</td>
+                                                                <td>Use GarageBand, Sing Sharp or RecForge II </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Apps to Use</h4>
+                                                        <ul>
+                                                            <li>Vanido (AI-based breath training) <a
+                                                                   href="https://www.vanido.io/">Download</a></li>
+                                                            <li>Perfect Ear (Pitch accuracy training) <a
+                                                                   href="#">Download</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 2 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day2Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day2"
+                                                        aria-expanded="false" aria-controls="day2">
+                                                    Day 2: Intro to Vocal Warm-Ups & Pitch Training
+                                                </button>
+                                            </h2>
+                                            <div id="day2" class="accordion-collapse collapse"
+                                                 aria-labelledby="day2Heading" data-bs-parent="#week1Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Full Warm-Up Routine (Lip Trills, Sirens, Humming,
+                                                                    Scales)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Pitch Matching (Sing along with a piano app)</td>
+                                                                <td><a href="#">Read Guide</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Solfege Practice (Do-Re-Mi Scales)</td>
+                                                                <td>Solfege & Ear Training Guide</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Siren Exercise (Smooth note transitions from low to
+                                                                    high)</td>
+                                                                <td><a href="#">Read Guide</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Record & Self-Evaluate (Check pitch accuracy &
+                                                                    posture)</td>
+                                                                <td>Use GarageBand or Sing Sharp App</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Apps to Use</h4>
+                                                        <ul>
+                                                            <li>Singt Sharp (Vocal Range & Pitch Trainer) <a
+                                                                   href="https://singtsharp.com/">Download</a></li>
+                                                            <li>Perfect Ear (Pitch accuracy training) <a
+                                                                   href="#">Download</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 3 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day3Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day3"
+                                                        aria-expanded="false" aria-controls="day3">
+                                                    Day 3: Discover Your Vocal Range
+                                                </button>
+                                            </h2>
+                                            <div id="day3" class="accordion-collapse collapse"
+                                                 aria-labelledby="day3Heading" data-bs-parent="#week1Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Warm-up (Lip Trills & Sirens) </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Find Your Lowest Note (Sing downward from Middle C)
+                                                                </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Find Your Highest Note (Sing upward from iddle C)
+                                                                </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Use a Vocal Range App (Confirm your range with AI
+                                                                    tools)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>How to Determine Your Vocal Range</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 4 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day4Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day4"
+                                                        aria-expanded="false" aria-controls="day4">
+                                                    Day 4: Apply Your Vocal Range to Song Selection
+                                                </button>
+                                            </h2>
+                                            <div id="day4" class="accordion-collapse collapse"
+                                                 aria-labelledby="day4Heading" data-bs-parent="#week1Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Compare Your Range to Singer Categories (Bass,
+                                                                    Tenor, Alto, etc.)</td>
+                                                                <td>Voice Type Guide – Musical U</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>15 min</td>
+                                                                <td>Sing Along to Test Songs in Your Range</td>
+                                                                <td>Best Songs for Your Vocal Range</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Pick 2 Songs & Practice a Verse & Chorus</td>
+                                                                <td>Use Smule or YouTube Karaoke</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 5 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day5Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day5"
+                                                        aria-expanded="false" aria-controls="day5">
+                                                    Day 5: Master Vocal Resonance & Tone Clarity
+                                                </button>
+                                            </h2>
+                                            <div id="day5" class="accordion-collapse collapse"
+                                                 aria-labelledby="day5Heading" data-bs-parent="#week1Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Humming & Lip Trills (Focus on vibrating resonance)
+                                                                </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Chest Voice Exercises (Low range, “Ahhh” sounds)
+                                                                </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Head Voice Training (Light falsetto sirens)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Tone Clarity (Sing vowel sounds “Ee, Ah, Oh” with
+                                                                    relaxed jaw)</td>
+                                                                <td><a href="#">Read Guide</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Record & Self-Evaluate (Listen for resonance &
+                                                                    clarity)</td>
+                                                                <td>Use GarageBand or Smule</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>How to Sing with a Strong, Clear Tone</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Goals Section -->
+                                    <div class="reference mt-4">
+                                        <h4>Goals for the Week</h4>
+                                        <ul>
+                                            <li>You have a strong breathing technique.</li>
+                                            <li>You can accurately match pitch.</li>
+                                            <li>You know your exact vocal range.</li>
+                                            <li>You have chosen 2 beginner-friendly songs.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Week 2 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="week2Heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#week2" aria-expanded="false" aria-controls="week2">
+                                    Week 2: Strengthen Your Vocal Power & Control
+                                </button>
+                            </h2>
+                            <div id="week2" class="accordion-collapse collapse" aria-labelledby="week2Heading"
+                                 data-bs-parent="#vocalCourse">
+                                <div class="accordion-body">
+                                    <div class="accordion" id="week2Days">
+                                        <!-- Day 1 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day6Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day6"
+                                                        aria-expanded="false" aria-controls="day6">
+                                                    Day 6: Expand Vocal Range & Strengthen Registers
+                                                </button>
+                                            </h2>
+                                            <div id="day6" class="accordion-collapse collapse"
+                                                 aria-labelledby="day6Heading" data-bs-parent="#week2Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Full Vocal Warm-up (Lip Trills, Humming, Sirens,
+                                                                    Scales)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Chest Voice Strengthening (“Ah” in low range) </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Head Voice Practice (Falsetto slides & Sirens)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Mixed Voice Connection (Blending chest & head voice
+                                                                    smoothly)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Record & Analyze Progress (Check transitions between
+                                                                    registers) </td>
+                                                                <td>Use GarageBand or Sing Sharp. </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Apps to Use</h4>
+                                                        <ul>
+                                                            <li>Sing Sharp (Vocal register detector) <a
+                                                                   href="https://singtsharp.com/">Download</a></li>
+                                                        </ul>
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>Understanding Chest, Mix, & Head Voice</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 2 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day7Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day7"
+                                                        aria-expanded="false" aria-controls="day7">
+                                                    Day 7: Improve Vocal Articulation & Clarity
+                                                </button>
+                                            </h2>
+                                            <div id="day7" class="accordion-collapse collapse"
+                                                 aria-labelledby="day7Heading" data-bs-parent="#week2Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Tongue Twisters & Consonant Exercises</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Vowel Shaping (Open “Ah, Ee, Oh” sounds smoothly)
+                                                                </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Mumbling Fix (Over-exaggerate lyrics while singing)
+                                                                </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Song Practice (Focus on crisp consonants & open
+                                                                    vowels)</td>
+                                                                <td>Use Smule or YouTube Karaoke </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Apps to Use</h4>
+                                                        <ul>
+                                                            <li>Vox Tools (Articulation & clarity exercises) <a
+                                                                   href="https://www.voxtoolsapp.com/">Download</a></li>
+                                                        </ul>
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>Diction & Pronunciation for Singers</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 3 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day8Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day8"
+                                                        aria-expanded="false" aria-controls="day8">
+                                                    Day 8: Strengthen Breath Control & Support
+                                                </button>
+                                            </h2>
+                                            <div id="day8" class="accordion-collapse collapse"
+                                                 aria-labelledby="day8Heading" data-bs-parent="#week2Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Breath Control (4-4-8 Breathing Exercise)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Sustained Notes (Hold a note for 15 sec, steady
+                                                                    tone)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Diaphragm Strengthening (Singing while doing wall
+                                                                    sits) </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Breath Control Song Practice (Choose a slow song,
+                                                                    focus on steady breath)</td>
+                                                                <td>Use Smule or Sing Sharp</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Record & Review (Listen for breathiness or weakness
+                                                                    in notes)</td>
+                                                                <td>Use GarageBand</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Apps to Use</h4>
+                                                        <ul>
+                                                            <li>Breathe+ (Guided breathing trainer) <a
+                                                                   href="#">Download</a></li>
+                                                        </ul>
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>The Importance of Breath Control in Singing <a
+                                                                   href="#">Download</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 4 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day9Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day9"
+                                                        aria-expanded="false" aria-controls="day9">
+                                                    Day 9: Develop Vocal Agility & Speed
+                                                </button>
+                                            </h2>
+                                            <div id="day9" class="accordion-collapse collapse"
+                                                 aria-labelledby="day9Heading" data-bs-parent="#week2Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Scale Runs & Melisma Training</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Fast Note Transitions (Sing scales with metronome
+                                                                </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Speed Song Practice (Try riffs & runs in a fast
+                                                                    song)</td>
+                                                                <td>Use Smule or YouTube Karaoke</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Record & Compare (Listen for smooth vs. choppy
+                                                                    transitions)</td>
+                                                                <td>Use GarageBand App</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>How to Sing Riffs & Runs <a href="#">Read More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 5 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day10Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day10"
+                                                        aria-expanded="false" aria-controls="day10">
+                                                    Day 10: Performance & Expression Training
+                                                </button>
+                                            </h2>
+                                            <div id="day10" class="accordion-collapse collapse"
+                                                 aria-labelledby="day10Heading" data-bs-parent="#week2Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Facial Expression Training (Sing in front of a
+                                                                    mirror)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Posture & Movement (Practice natural gestures while
+                                                                    singing)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Song Practice (Sing a song focusing on storytelling)
+                                                                </td>
+                                                                <td>Use Smule or YouTube Karaoke</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Record & Review (Analyze facial expression &
+                                                                    movement)</td>
+                                                                <td>Use GarageBand App</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>How to Develop Stage Presence <a href="#">Read More</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Goals Section -->
+                                    <div class="reference mt-4">
+                                        <h4>Goals for the Week</h4>
+                                        <ul>
+                                            <li>You can switch smoothly between chest, mix, & head voice.</li>
+                                            <li>You have better breath control for long notes.</li>
+                                            <li>You can articulate words clearly & sing with agility.</li>
+                                            <li>You feel more confident performing & expressing emotions.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="week3Heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#week3" aria-expanded="false" aria-controls="week3">
+                                    Week 3: Building Power, Stamina & Vocal Performance
+                                </button>
+                            </h2>
+                            <div id="week3" class="accordion-collapse collapse" aria-labelledby="week3Heading"
+                                 data-bs-parent="#vocalCourse">
+                                <div class="accordion-body">
+                                    <div class="accordion" id="week3Days">
+                                        <!-- Day 1 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day11Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day11"
+                                                        aria-expanded="false" aria-controls="day11">
+                                                    Day 11: Master Vocal Power & Projection
+                                                </button>
+                                            </h2>
+                                            <div id="day11" class="accordion-collapse collapse"
+                                                 aria-labelledby="day11Heading" data-bs-parent="#week3Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Full Warm-up (Lip Trills, Humming, Sirens, Scales)
+                                                                </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Diaphragmatic Power Exercise (Sing loud, strong
+                                                                    notes with support)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Resonance Training (Humming & Chest Vibrations)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Projection Without Straining (Forward Placement
+                                                                    Singing)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Sing a Powerful Song (Hold sustained notes strongly)
+                                                                </td>
+                                                                <td>Use Smule or YouTube Karaoke</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Apps to Use</h4>
+                                                        <ul>
+                                                            <li>Sing Sharp (Check loudness & breath support) <a
+                                                                   href="#">Download</a></li>
+                                                        </ul>
+                                                        <h4>Blog Reference:</h4>
+                                                        <ul>
+                                                            <li>How to Increase Vocal Power Without Strain <a
+                                                                   href="#">Read More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 2 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day12Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day12"
+                                                        aria-expanded="false" aria-controls="day12">
+                                                    Day 12: Improve Dynamic Control (Soft to Loud Transitions)
+                                                </button>
+                                            </h2>
+                                            <div id="day12" class="accordion-collapse collapse"
+                                                 aria-labelledby="day12Heading" data-bs-parent="#week3Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Warm-up with Soft & Loud Variations</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Crescendo & Decrescendo on a Single Note</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Soft Falsetto Practice (Gentle, airy head voice
+                                                                    control) </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Practice Singing a Song with Dynamics</td>
+                                                                <td>Choose a song & sing verses softly, chorus
+                                                                    powerfully</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Record & Self-Check (Listen for smooth transitions)
+                                                                </td>
+                                                                <td>Use GarageBand App</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Apps to Use</h4>
+                                                        <ul>
+                                                            <li>Vanido (Dynamic range practice) <a href="#">Download</a>
+                                                            </li>
+                                                        </ul>
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>Mastering Soft & Loud Singing <a href="#">Read More</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 3 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day13Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day13"
+                                                        aria-expanded="false" aria-controls="day13">
+                                                    Day 13: Master Vibrato & Tone Control
+                                                </button>
+                                            </h2>
+                                            <div id="day13" class="accordion-collapse collapse"
+                                                 aria-labelledby="day13Heading" data-bs-parent="#week3Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Warm-up (Lip Trills, Humming, Sirens) </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Vibrato Training (Controlled pitch wavering, not
+                                                                    forced shake)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Singing Straight Tones vs. Vibrato (Alternating
+                                                                    between them)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Record & Analyze (Listen for unnatural shaking or
+                                                                    wobbly tone)</td>
+                                                                <td>Use GarageBand App</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Sing a Song Adding Vibrato in the Right Moments</td>
+                                                                <td>Use Smule or YouTube Karaoke</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Apps to Use</h4>
+                                                        <ul>
+                                                            <li>Sing Sharp (Check vibrato control) <a
+                                                                   href="https://singtsharp.com/">Download</a></li>
+                                                        </ul>
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>How to Sing with Vibrato Naturally <a href="#">Read
+                                                                    More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 4 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day14Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day14"
+                                                        aria-expanded="false" aria-controls="day14">
+                                                    Day 14: Full Performance Training & Stage Presence
+                                                </button>
+                                            </h2>
+                                            <div id="day14" class="accordion-collapse collapse"
+                                                 aria-labelledby="day14Heading" data-bs-parent="#week3Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Stage Posture & Confidence Drills (Mirror practice,
+                                                                    relaxed stance)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Facial Expressions & Emotion Exercises</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Song Performance (Sing with movement & expression)
+                                                                </td>
+                                                                <td>Solfege & Ear Training Guide</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Microphone Technique (Distance, angles, projection
+                                                                    adjustment)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>20 min</td>
+                                                                <td>Record & Self-Analyze (Watch for confidence,
+                                                                    movement, & expression)</td>
+                                                                <td>Use GarageBand or Sing Sharp App</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Apps to Use</h4>
+                                                        <ul>
+                                                            <li>Stage Cam (Simulate performance recording) <a
+                                                                   href="#">Download</a></li>
+                                                        </ul>
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>How to Build Confidence While Performing <a
+                                                                   href="#">Read More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 5 -->
+                                        <!-- <div class="accordion-item">
+                                        <h2 class="accordion-header" id="day15Heading">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#day15" aria-expanded="false" aria-controls="day15">
+                                                Day 2: Intro to Vocal Warm-Ups & Pitch Training
+                                            </button>
+                                        </h2>
+                                        <div id="day15" class="accordion-collapse collapse" aria-labelledby="day15Heading" data-bs-parent="#week3Days">
+                                            <div class="accordion-body">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Time</th>
+                                                            <th>Exercise</th>
+                                                            <th>Resource</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>10 min</td>
+                                                            <td>Full Warm-Up Routine (Lip Trills, Sirens, Humming, Scales)</td>
+                                                            <td><a href="#">Watch Video</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>10 min</td>
+                                                            <td>Pitch Matching (Sing along with a piano app)</td>
+                                                            <td><a href="#">Read Guide</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>5 min</td>
+                                                            <td>Solfege Practice (Do-Re-Mi Scales)</td>
+                                                            <td>Solfege & Ear Training Guide</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>5 min</td>
+                                                            <td>Siren Exercise (Smooth note transitions from low to high)</td>
+                                                            <td><a href="#">Read Guide</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>5 min</td>
+                                                            <td>Record & Self-Evaluate (Check pitch accuracy & posture)</td>
+                                                            <td>Use GarageBand or Sing Sharp App</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="reference mt-4">
+                                                    <h4>Apps to Use</h4>
+                                                    <ul>
+                                                        <li>Singt Sharp (Vocal Range & Pitch Trainer) <a href="https://singtsharp.com/">Download</a></li>
+                                                        <li>Perfect Ear (Pitch accuracy training) <a href="#">Download</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    </div>
+                                    <!-- Goals Section -->
+                                    <div class="reference mt-4">
+                                        <h4>Goals for the Week</h4>
+                                        <ul>
+                                            <li>You can project your voice powerfully without straining.</li>
+                                            <li>You have better control over loud & soft dynamics.</li>
+                                            <li>Your vibrato sounds more natural & controlled.</li>
+                                            <li>You feel more confident performing in front of others.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="week4Heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#week4" aria-expanded="false" aria-controls="week4">
+                                    Week 4: Mastery Through Relaxed Learning & Stamina Building
+                                </button>
+                            </h2>
+                            <div id="week4" class="accordion-collapse collapse" aria-labelledby="week4Heading"
+                                 data-bs-parent="#vocalCourse">
+                                <div class="accordion-body">
+                                    <div class="accordion" id="week4Days">
+                                        <!-- Day 1 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day16Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day16"
+                                                        aria-expanded="false" aria-controls="day16">
+                                                    Day 16: Vocal Stamina & Relaxation Techniques
+                                                </button>
+                                            </h2>
+                                            <div id="day16" class="accordion-collapse collapse"
+                                                 aria-labelledby="day16Heading" data-bs-parent="#week4Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Mindful Breathing (Inhale 4 sec, hold 4 sec, exhale
+                                                                    8 sec)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Gentle Warm-ups (Humming, Lip Trills, Sirens)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Vocal Endurance Training (Sustaining notes, relaxed
+                                                                    jaw & tongue) </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Singing a Relaxed Song (Focus on effortless,
+                                                                    tension-free sound)</td>
+                                                                <td>Use Smule or YouTube Karaoke</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Stretch & Cool Down (Neck, jaw, shoulders, tongue
+                                                                    stretch)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Apps to Use</h4>
+                                                        <ul>
+                                                            <li>Breathe+ (Guided breathing & relaxation) <a
+                                                                   href="#">Download</a></li>
+                                                        </ul>
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>Avoiding Vocal Fatigue & Strain <a href="#">Read
+                                                                    More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 2 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day17Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day17"
+                                                        aria-expanded="false" aria-controls="day17">
+                                                    Day 17: Smooth Vocal Transitions & Range Expansion
+                                                </button>
+                                            </h2>
+                                            <div id="day17" class="accordion-collapse collapse"
+                                                 aria-labelledby="day17Heading" data-bs-parent="#week4Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Light Humming Warm-up (Smooth transitions between
+                                                                    chest & head voice)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Chest-to-Head Voice Sliding (Sirens & “ng” slides)
+                                                                </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Range Expansion with No Strain (Descending scales,
+                                                                    light falsetto practice)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Sing a Song in a Comfortable Range (No pushing high
+                                                                    notes, just ease)</td>
+                                                                <td>Use Smule or YouTube Karaoke</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Relaxation Cool Down & Self-Check</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>How to Expand Vocal Range Without Strain <a
+                                                                   href="#">Download</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 3 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day18Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day18"
+                                                        aria-expanded="false" aria-controls="day18">
+                                                    Day 18: Strengthening Soft Singing & Vocal Agility
+                                                </button>
+                                            </h2>
+                                            <div id="day18" class="accordion-collapse collapse"
+                                                 aria-labelledby="day18Heading" data-bs-parent="#week4Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Gentle Vocal Warm-up (Soft humming, lip rolls)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Sustaining Soft Notes (Controlled, breathy head
+                                                                    voice exercises) </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Agility Training (Fast scale runs, note accuracy
+                                                                    practice) </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Song Practice (Singing softly in a song while
+                                                                    maintaining clarity) </td>
+                                                                <td>Use Smule or YouTube Karaoke</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Record & Self-Check (Listen for smoothness, no
+                                                                    cracks in voice)</td>
+                                                                <td>Use GarageBand App</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>How to Sing Riffs & Runs Smoothly <a href="#">Read
+                                                                    More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 4 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day19Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day19"
+                                                        aria-expanded="false" aria-controls="day19">
+                                                    Day 19: Vocal Expression & Storytelling Through Song
+                                                </button>
+                                            </h2>
+                                            <div id="day19" class="accordion-collapse collapse"
+                                                 aria-labelledby="day19Heading" data-bs-parent="#week4Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Breath Control for Expression (Holding long notes,
+                                                                    controlling dynamics)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Tone Variation Exercise (Bright & dark tone
+                                                                    practice)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Facial Expression & Emotion Training</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Siren Exercise (Smooth note transitions from low to
+                                                                    high)</td>
+                                                                <td>Use Smule or YouTube Karaoke</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Reflect & Review Performance (Record & analyze
+                                                                    expressiveness)</td>
+                                                                <td>Use GarageBand App</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>How to Show Emotion While Singing <a href="#">Read
+                                                                    More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 5 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day20Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day20"
+                                                        aria-expanded="false" aria-controls="day20">
+                                                    Day 20: Optional Rest & Reflection Day
+                                                </button>
+                                            </h2>
+                                            <div id="day20" class="accordion-collapse collapse"
+                                                 aria-labelledby="day20Heading" data-bs-parent="#week4Days">
+                                                <div class="accordion-body">
+                                                    <div class="reference mt-4">
+                                                        <h4>Goal</h4>
+                                                        <ul>
+                                                            <li>Let the voice recover, reflect on progress, and reset
+                                                                for the next stage.</li>
+                                                        </ul>
+                                                        <h4>Apps to Use</h4>
+                                                        <ul>
+                                                            <li>Light humming or breathing exercises (only if you want
+                                                                to sing).</li>
+                                                            <li>Listen to recordings from past days & note improvements.
+                                                            </li>
+                                                            <li>Watch professional singers & analyze their technique.
+                                                            </li>
+                                                            <li>Rest your voice completely if needed!</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Goals Section -->
+                                    <div class="reference mt-4">
+                                        <h4>Goals for the Week</h4>
+                                        <ul>
+                                            <li>You can sing with ease and less tension.</li>
+                                            <li>Your register transitions are smoother.</li>
+                                            <li>You can control soft and loud singing better.</li>
+                                            <li>Your expression and emotional connection have improved.</li>
+                                            <li>You understand the importance of rest & vocal care.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="week5Heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#week5" aria-expanded="false" aria-controls="week5">
+                                    Week 5: Personal Style, Confidence & Advanced Vocal Mastery
+                                </button>
+                            </h2>
+                            <div id="week5" class="accordion-collapse collapse" aria-labelledby="week5Heading"
+                                 data-bs-parent="#vocalCourse">
+                                <div class="accordion-body">
+                                    <div class="accordion" id="week5Days">
+                                        <!-- Day 1 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day21Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day21"
+                                                        aria-expanded="false" aria-controls="day21">
+                                                    Day 21: Finding & Refining Your Unique Vocal Tone
+                                                </button>
+                                            </h2>
+                                            <div id="day21" class="accordion-collapse collapse"
+                                                 aria-labelledby="day21Heading" data-bs-parent="#week5Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Breathing Relaxation & Light Humming</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Tone Discovery (Bright vs. Dark Voice)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Texture & Vocal Color Training</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Sing a Song in Different Styles (Experimenting with
+                                                                    tone & phrasing)</td>
+                                                                <td>Use Smule or YouTube Karaoke</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Record & Analyze (Find what makes your voice unique)
+                                                                </td>
+                                                                <td>Use GarageBand App</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>How to Develop Your Unique Vocal Tone <a href="#">Read
+                                                                    More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 2 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day22Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day22"
+                                                        aria-expanded="false" aria-controls="day22">
+                                                    Day 22: Intro to Vocal Warm-Ups & Pitch Training
+                                                </button>
+                                            </h2>
+                                            <div id="day22" class="accordion-collapse collapse"
+                                                 aria-labelledby="day22Heading" data-bs-parent="#week5Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Humming & Scale Warm-ups (Easing into riffs & runs)
+                                                                </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Slow Riff Practice (Breaking down into steps)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Building Speed (Increasing note transitions
+                                                                    smoothly)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Improvise Riffs & Ad-Libs on a Song</td>
+                                                                <td>Use Smule or YouTube Karaoke</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Record & Review (Listening for smoothness & control)
+                                                                </td>
+                                                                <td>Use GarageBand App</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>How to Sing Riffs & Runs Easily <a href="#">Read
+                                                                    More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 3 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day23Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day23"
+                                                        aria-expanded="false" aria-controls="day23">
+                                                    Day 23: Strengthening Stage Presence & Movement
+                                                </button>
+                                            </h2>
+                                            <div id="day23" class="accordion-collapse collapse"
+                                                 aria-labelledby="day23Heading" data-bs-parent="#week5Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Posture & Breath Awareness on Stage</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Body Language & Hand Gestures </td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Mic Technique (Holding, positioning, adjusting
+                                                                    distance)</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Performing a Song with Movement & Expression</td>
+                                                                <td>Use Smule or YouTube Karaoke</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Watch Yourself & Self-Analyze Performance</td>
+                                                                <td>Use GarageBand or StageCam</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>How to Command the Stage While Singing <a href="#">Read
+                                                                    More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 4 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day24Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day24"
+                                                        aria-expanded="false" aria-controls="day24">
+                                                    Day 24: Emotional Connection & Storytelling Through Song
+                                                </button>
+                                            </h2>
+                                            <div id="day24" class="accordion-collapse collapse"
+                                                 aria-labelledby="day24Heading" data-bs-parent="#week5Days">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Time</th>
+                                                                <th>Exercise</th>
+                                                                <th>Resource</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Breath & Emotion Connection Exercise</td>
+                                                                <td><a href="#">Watch Video</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Facial Expression & Eye Contact Training</td>
+                                                                <td><a href="#">Read Guide</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Storytelling Through Lyrics (Speaking the lyrics
+                                                                    first, then singing) </td>
+                                                                <td><a href="#">Read Guide</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 min</td>
+                                                                <td>Performing a Song with Full Emotional Expression
+                                                                </td>
+                                                                <td>Use Smule or YouTube Karaoke</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 min</td>
+                                                                <td>Record & Self-Reflect on Expressiveness</td>
+                                                                <td>Use GarageBand App</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="reference mt-4">
+                                                        <h4>Blog Reference</h4>
+                                                        <ul>
+                                                            <li>How to Emotionally Connect with a Song <a href="#">Read
+                                                                    More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Day 5 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="day25Heading">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#day25"
+                                                        aria-expanded="false" aria-controls="day25">
+                                                    Day 25: Optional Rest & Reflection Day
+                                                </button>
+                                            </h2>
+                                            <div id="day25" class="accordion-collapse collapse"
+                                                 aria-labelledby="day25Heading" data-bs-parent="#week5Days">
+                                                <div class="accordion-body">
+                                                    <div class="reference mt-4">
+                                                        <h4>Goal</h4>
+                                                        <ul>
+                                                            <li>Recover, reflect, and internalize progress</li>
+                                                        </ul>
+                                                        <h4>What to Do Today?</h4>
+                                                        <ul>
+                                                            <li>Listen to previous recordings & compare improvements.
+                                                            </li>
+                                                            <li>Light vocal exercises only if needed.</li>
+                                                            <li>Analyze professional singers' styles.</li>
+                                                            <li>Take time to relax and enjoy music.</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Goals Section -->
+                                    <div class="reference mt-4">
+                                        <h4>Goals for the Week</h4>
+                                        <ul>
+                                            <li>You’ve developed a unique vocal style.</li>
+                                            <li>You can sing riffs & runs smoothly.</li>
+                                            <li>Your stage presence & movement feel more natural.</li>
+                                            <li>You connect emotionally to songs.</li>
+                                            <li>You feel more confident & expressive as an artist.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Overall Curriculum Tab -->
+                <div class="tab-pane fade" id="overall-curriculum" role="tabpanel"
+                     aria-labelledby="overall-curriculum-tab">
+                    <div class="reference mt-4">
+                        <h3>Overall Curriculum</h3>
+                        <p>This section will include the complete breakdown of the curriculum as per the document.</p>
+                        <ul>
+                            <li>Introduction to vocal training and its importance</li>
+                            <li>Breathing techniques and posture alignment</li>
+                            <li>Voice warm-ups and vocal strengthening exercises</li>
+                            <li>Pitch control and vocal resonance</li>
+                            <li>Song interpretation and performance techniques</li>
+                            <li>Advanced vocal techniques and range expansion</li>
+                            <li>Recording and analyzing one's own voice</li>
+                            <li>Final performance and feedback</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const checkbox = document.getElementById("checkbox")
+            checkbox.addEventListener("change", () => {
+                document.body.classList.toggle("dark-mode")
+            })
+        </script>
+    </body>
+
+</html>
